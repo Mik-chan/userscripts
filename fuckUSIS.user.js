@@ -23,6 +23,10 @@ $(document).ready(function(){
                     $(this).parent().remove();
             });
         });
+        
+        if($("tr").length > 2)
+            $('body').append('<embed src="https://wav-library.net/sfx/mix/AirRaidSirenAlert.mp3" autostart="true" hidden="true" loop="false">');
+        
         setTimeout(function(){
             window.location.reload(1);
         }, 5000);
