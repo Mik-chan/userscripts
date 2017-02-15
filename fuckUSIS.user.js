@@ -9,7 +9,22 @@
 // @require https://code.jquery.com/jquery-3.1.1.min.js
 // ==/UserScript==
 
+function getCookie(name) {
+  var value = "; " + document.cookie;
+  var parts = value.split("; " + name + "=");
+  if (parts.length == 2) return parts.pop().split(";").shift();
+}
+
 $(document).ready(function(){
+    if(window.location.pathname != '/index.jsp' || window.location.pathname != '/main.jsp' || window.location.pathname != '/') {
+        var c_name = "JSESSIONID";
+        var c_value = getCookie(c_name);
+        var exdays = 1;
+        var exdate=new Date();
+        exdate.setDate(exdate.getDate() + exdays);
+        document.cookie=encodeURIComponent(c_name) + "=" + encodeURIComponent(c_value) + (!exdays ? "" : "; expires="+exdate.toUTCString());
+    }
+
     
     $("body").attr("onload","LoadUSIS();");
     $("body").attr("onunload","");
@@ -32,19 +47,23 @@ $(document).ready(function(){
         }, 5000);
     }
     
+    if(window.location.pathname == '/StdEnrollCourse.do') {
+        $("table").slice(37).first().append('<iframe name="CrsListOfferedCoursesPrint" src="CrsListOfferedCoursesPrint.jsp" width="760" height="150"></iframe>');
+    }
+    
 });
+
+function LoadUSIS(){
+    if(window.location.pathname == '/index.jsp' || window.location.pathname == '/main.jsp' || window.location.pathname == '/') {
+        window.location.replace("/main.jsp");
+    }
+}
 
 (function() {
     document.oncontextmenu=new Function("");
     document.onmousedown = null;
     
     counter = Infinity;
-    
-    function LoadUSIS(){
-        if(window.location.pathname == '/podcast') {
-            window.location.replace("/main.jsp");
-        }
-    }
     
     this.name = "USIS";
 })();
