@@ -10,8 +10,24 @@
 // ==/UserScript==
 
 $(document).ready(function(){
+    
     $("body").attr("onload","LoadUSIS();");
     $("body").attr("onunload","");
+    
+        if(window.location.pathname == '/CrsListOfferedCoursesPrint.jsp') {
+        $("tr").slice(2).each(function(){
+            $(this).children("td:eq(4)").each(function(){
+                var its = $(this).text();
+                its = its.split("/");
+                if(parseInt(its[0]) >= parseInt(its[1]))
+                    $(this).parent().remove();
+            });
+        });
+        setTimeout(function(){
+            window.location.reload(1);
+        }, 5000);
+    }
+    
 });
 
 (function() {
