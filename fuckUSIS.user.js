@@ -18,7 +18,7 @@ $(document).ready(function(){
     document.oncontextmenu=new Function("");
     document.onmousedown = null;
     
-    counter = 86400;
+    counter = Infinity;
     
     function LoadUSIS(){
         if(window.location.pathname == '/podcast') {
