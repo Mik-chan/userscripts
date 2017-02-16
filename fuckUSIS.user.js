@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Fuck Usis
 // @namespace    http://usis.yildiz.edu.tr/
-// @version      1.2
+// @version      0.1
 // @description  Remove stupid restrictions
 // @author       Mikchan
 // @match        http://usis.yildiz.edu.tr/*
@@ -9,14 +9,29 @@
 // @require https://code.jquery.com/jquery-3.1.1.min.js
 // ==/UserScript==
 
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
 function getCookie(name) {
   var value = "; " + document.cookie;
   var parts = value.split("; " + name + "=");
   if (parts.length == 2) return parts.pop().split(";").shift();
 }
 
+function remove_dat_shit(){
+    $("tr").slice(2).each(function(){
+        $(this).children("td:eq(4)").each(function(){
+            var its = $(this).text();
+            its = its.split("/");
+            if(parseInt(its[0]) == parseInt(its[1]))
+                $(this).parent().remove();
+        });
+    });
+}
+
 $(document).ready(function(){
-    if(window.location.pathname != '/index.jsp' || window.location.pathname != '/main.jsp' || window.location.pathname != '/') {
+    if(window.location.pathname != '/index.jsp' && window.location.pathname != '/main.jsp' && window.location.pathname != '/') {
         var c_name = "JSESSIONID";
         var c_value = getCookie(c_name);
         var exdays = 1;
@@ -29,22 +44,20 @@ $(document).ready(function(){
     $("body").attr("onload","LoadUSIS();");
     $("body").attr("onunload","");
     
-        if(window.location.pathname == '/CrsListOfferedCoursesPrint.jsp') {
-        $("tr").slice(2).each(function(){
-            $(this).children("td:eq(4)").each(function(){
-                var its = $(this).text();
-                its = its.split("/");
-                if(parseInt(its[0]) >= parseInt(its[1]))
-                    $(this).parent().remove();
+    if(window.location.pathname == '/CrsListOfferedCoursesPrint.jsp') {
+        remove_dat_shit();
+        //if($("tr").length > 2)
+            //$('body').append('<embed src="https://wav-library.net/sfx/mix/AirRaidSirenAlert.mp3" autostart="true" hidden="true" loop="false">');
+        
+        setInterval(function () {
+            $('html').fadeOut(10, function() {
+                $(this).load('/CrsListOfferedCoursesPrint.jsp', function() {
+                    remove_dat_shit();
+                    $(this).fadeIn(10);
+                });
             });
-        });
-        
-        if($("tr").length > 2)
-            $('body').append('<embed src="https://wav-library.net/sfx/mix/AirRaidSirenAlert.mp3" autostart="true" hidden="true" loop="false">');
-        
-        setTimeout(function(){
-            window.location.reload(1);
         }, 5000);
+
     }
     
     if(window.location.pathname == '/StdEnrollCourse.do') {
@@ -64,6 +77,8 @@ function LoadUSIS(){
     document.onmousedown = null;
     
     counter = Infinity;
+    
+
     
     this.name = "USIS";
 })();
