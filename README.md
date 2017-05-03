@@ -1,2 +1,2 @@
 # userscripts
-Install TamperMonkey and insert scrit there
+Install TamperMonkey and insert scripts there
