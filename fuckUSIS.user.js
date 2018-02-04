@@ -9,6 +9,8 @@
 // @require https://code.jquery.com/jquery-3.1.1.min.js
 // ==/UserScript==
 
+this.$ = this.jQuery = jQuery.noConflict(true);
+
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
@@ -63,7 +65,13 @@ $(document).ready(function(){
     if(window.location.pathname == '/StdEnrollCourse.do') {
         $("table").slice(37).first().append('<iframe name="CrsListOfferedCoursesPrint" src="CrsListOfferedCoursesPrint.jsp" width="760" height="150"></iframe>');
     }
+  
+    document.oncontextmenu=new Function("");
+    document.onmousedown = null;
+
+    counter = 100 * 365 * 24 * 60 * 60; //100 sene yeter mi?
     
+    this.name = "USIS";
 });
 
 function LoadUSIS(){
@@ -71,14 +79,3 @@ function LoadUSIS(){
         window.location.replace("/main.jsp");
     }
 }
-
-(function() {
-    document.oncontextmenu=new Function("");
-    document.onmousedown = null;
-    
-    counter = Infinity;
-    
-
-    
-    this.name = "USIS";
-})();
