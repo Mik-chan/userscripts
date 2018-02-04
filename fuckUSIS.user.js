@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Fuck Usis
 // @namespace    http://usis.yildiz.edu.tr/
-// @version      0.1
+// @version      0.2
 // @description  Remove stupid restrictions
 // @author       Mikchan
 // @match        http://usis.yildiz.edu.tr/*
