@@ -13,7 +13,7 @@ var $j = jQuery.noConflict();
 
 function is_asian(title) {
     let allow_tags = [
-        "asian", "japanese", "chinese", "vietnamese", "thai",
+        "asian", "japanese", "chinese", "vietnamese", "thai", "korean",
         "ems-", "utirusu", "tachikawa_rie", "iori_moe", "kawasaki_aya", "yurisa_(ii)", "cutecat"
     ];
 
