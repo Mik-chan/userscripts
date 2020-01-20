@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         Highligh Asian
 // @namespace    mikchan
-// @version      0.1
+// @version      1.0
 // @description  Highlighs content with asians on Idol Complex
-// @author       You
+// @author       https://github.com/Mik-chan
 // @match        https://idol.sankakucomplex.com/*
 // @grant        none
 // @require      https://code.jquery.com/jquery-3.4.1.js
